@@ -1,11 +1,15 @@
-package pl.inteca.family.mappers;
+package pl.inteca.family.model.mappers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.inteca.family.dtos.FamilyDto;
+import pl.inteca.family.model.dtos.FamilyDto;
 import pl.inteca.family.model.Family;
 
 @Service
+@RequiredArgsConstructor
 public class FamilyMapper {
+
+    private final FamilyMemberMapper familyMemberMapper;
 
     public Family mapFamilyDtoToFamily(final FamilyDto familyDto){
         return new Family(
@@ -22,7 +26,8 @@ public class FamilyMapper {
                 family.getFamilyName(),
                 family.getNrOfAdults(),
                 family.getNrOfChildren(),
-                family.getNrOfInfants());
+                family.getNrOfInfants(),
+                familyMemberMapper.mapFamilyMemberListToFamilyMemberDtoList(family.getFamilyMembers()));
     }
 
 }

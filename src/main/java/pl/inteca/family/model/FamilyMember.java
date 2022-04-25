@@ -18,13 +18,21 @@ public class FamilyMember {
     private Long id;
     private String familyName;
     private String givenName;
+    private int age;
     private Long familyId;
     @ManyToOne
-    @JoinColumn(name = "FAMILIES_ID")
+    @JoinColumn(name = "FAMILIES_id")
     private Family family;
 
     public FamilyMember(String familyName, String givenName) {
         this.familyName = familyName;
         this.givenName = givenName;
+    }
+
+    public FamilyMember(Long id, String givenName, int age, Long familyId) {
+        this.id = id;
+        this.givenName = givenName;
+        this.age = age;
+        this.familyId = familyId;
     }
 }

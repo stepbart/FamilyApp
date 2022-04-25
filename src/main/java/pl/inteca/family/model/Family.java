@@ -1,6 +1,5 @@
 package pl.inteca.family.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +10,6 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "FAMILIES")
 public class Family {
@@ -45,5 +43,14 @@ public class Family {
         this.nrOfAdults = nrOfAdults;
         this.nrOfChildren = nrOfChildren;
         this.nrOfInfants = nrOfInfants;
+    }
+
+    public Family(Long id, String familyName, int nrOfAdults, int nrOfChildren, int nrOfInfants, List<FamilyMember> familyMembers) {
+        this.id = id;
+        this.familyName = familyName;
+        this.nrOfAdults = nrOfAdults;
+        this.nrOfChildren = nrOfChildren;
+        this.nrOfInfants = nrOfInfants;
+        this.familyMembers = familyMembers;
     }
 }

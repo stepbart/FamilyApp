@@ -1,4 +1,4 @@
-package pl.inteca.family.exception;
+package pl.inteca.family.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +11,11 @@ public class ErrorHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NotCorrectFamilyData.class)
     public ResponseEntity<Object> handleBadFamilyData(NotCorrectFamilyData exception) {
-        return new ResponseEntity<>("Podano niepoprawne dane rodziny", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("Podano niepoprawne dane rodziny.", HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NotCorrectFamilyId.class)
+    public ResponseEntity<Object> handleBadFamilyId(NotCorrectFamilyId exception) {
+        return new ResponseEntity<>("Podano niepoprawne dane rodziny.", HttpStatus.BAD_REQUEST);
     }
 }

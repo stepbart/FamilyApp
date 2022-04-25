@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import pl.inteca.family.model.Family;
 
 public interface FamilyRepository extends JpaRepository<Family, Long> {
+
 }
