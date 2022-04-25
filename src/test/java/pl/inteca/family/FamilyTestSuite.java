@@ -4,10 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import pl.inteca.family.exceptions.NotCorrectFamilyData;
 import pl.inteca.family.model.Family;
 import pl.inteca.family.model.FamilyMember;
+import pl.inteca.family.model.dtos.FamilyDto;
+import pl.inteca.family.model.dtos.FamilyMemberDto;
 import pl.inteca.family.repositories.FamilyMemberRepository;
 import pl.inteca.family.repositories.FamilyRepository;
+import pl.inteca.family.services.FamilyService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +24,9 @@ public class FamilyTestSuite {
 
     @Autowired
     FamilyMemberRepository familyMemberRepository;
+
+    @Autowired
+    FamilyService familyService;
 
     @Test
     void testFamilyAndMembersRelations() {
@@ -71,5 +78,40 @@ public class FamilyTestSuite {
         familyMemberRepository.deleteById(id6);
         familyRepository.deleteById(id1);
         familyRepository.deleteById(id2);
+    }
+
+    @Test
+    void testValidationFamilyData() {
+        //Given
+        FamilyMemberDto familyMember1 = new FamilyMemberDto(1L,"Smith", 44);
+        FamilyMemberDto familyMember2 = new FamilyMemberDto(2L,"Johnson", 15);
+        FamilyMemberDto familyMember3 = new FamilyMemberDto(3L,"Johnson", 56);
+        FamilyMemberDto familyMember4 = new FamilyMemberDto(4L,"Smith", 1);
+        FamilyMemberDto familyMember5 = new FamilyMemberDto(5L,"Falsy", 25);
+
+        List<FamilyMemberDto> familyMembers1 = new ArrayList<>();
+        List<FamilyMemberDto> familyMembers2 = new ArrayList<>();
+        List<FamilyMemberDto> familyMembers3 = new ArrayList<>();
+        familyMembers1.add(familyMember1);
+        familyMembers1.add(familyMember2);
+        familyMembers2.add(familyMember3);
+        familyMembers2.add(familyMember4);
+        familyMembers3.add(familyMember5);
+
+        FamilyDto family1 = new FamilyDto("Smith",1,1,0,familyMembers1);
+        FamilyDto family2 = new FamilyDto("Johnson",1,1,1,familyMembers2);
+        FamilyDto family3 = new FamilyDto("Falsy",12,0,0,familyMembers3);
+
+        //When
+        boolean validation1 = familyService.validateFamilyData(family1);
+        boolean validation2 = familyService.validateFamilyData(family2);
+
+        //Then
+        Assertions.assertTrue(validation1);
+        Assertions.assertFalse(validation2);
+        Assertions.assertThrowsExactly(NotCorrectFamilyData.class,
+                () -> {
+                familyService.createFamily(family3);
+                });
     }
 }

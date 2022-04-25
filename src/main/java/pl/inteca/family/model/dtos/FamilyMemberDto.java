@@ -13,4 +13,10 @@ public class FamilyMemberDto {
     private String givenName;
     private int age;
     private Long familyId;
+
+    public FamilyMemberDto(Long id, String givenName, int age) {
+        this.id = id;
+        this.givenName = givenName;
+        this.age = age;
+    }
 }

@@ -33,13 +33,13 @@ public class FamilyService {
         }
     }
 
-    private boolean validateFamilyData(FamilyDto familyDto) {
+    public boolean validateFamilyData(FamilyDto familyDto) {
         int adultCheck = 0;
         int childrenCheck = 0;
         int infantsCheck = 0;
         for (FamilyMemberDto member : familyDto.getFamilyMembers())
         {
-            if (member.getAge()>0 && member.getAge()<=4)
+            if (member.getAge()>=0 && member.getAge()<=4)
             {
                 infantsCheck++;
             }

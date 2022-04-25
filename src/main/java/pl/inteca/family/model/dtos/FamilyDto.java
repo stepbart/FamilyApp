@@ -17,4 +17,12 @@ public class FamilyDto {
     private int nrOfChildren;
     private int nrOfInfants;
     private List<FamilyMemberDto> familyMembers;
+
+    public FamilyDto(String familyName, int nrOfAdults, int nrOfChildren, int nrOfInfants, List<FamilyMemberDto> familyMembers) {
+        this.familyName = familyName;
+        this.nrOfAdults = nrOfAdults;
+        this.nrOfChildren = nrOfChildren;
+        this.nrOfInfants = nrOfInfants;
+        this.familyMembers = familyMembers;
+    }
 }
