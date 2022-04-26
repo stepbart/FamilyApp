@@ -2,6 +2,7 @@ package pl.inteca.family.model.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class FamilyDto {
 
     private Long id;
@@ -25,4 +27,5 @@ public class FamilyDto {
         this.nrOfInfants = nrOfInfants;
         this.familyMembers = familyMembers;
     }
+
 }

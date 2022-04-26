@@ -5,4 +5,6 @@ import pl.inteca.family.model.Family;
 
 public interface FamilyRepository extends JpaRepository<Family, Long> {
 
+    @Override
+    <S extends Family> S save(S entity);
 }
